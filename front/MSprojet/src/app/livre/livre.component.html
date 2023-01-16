@@ -1,0 +1,62 @@
+
+<div >
+    <div class="container" >
+     
+        <div class="row"  >
+          <h2 align="center">Ajouter un livre</h2>
+            <div class="col-md-6">
+                <div class="card">
+                    <form  (ngSubmit)="Ajouter(myForm)" #myForm="ngForm" >
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">titre</label>
+                        <input [(ngModel)]="livre.title" type="text" class="form-control" id="title" name="title"  required #title="ngModel" >
+                      </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">author</label>
+                            <input [(ngModel)]="livre.author" type="text" class="form-control" id="author" name="author"  required #author="ngModel" >
+                          </div>
+                          <div [hidden]="!author.pristine" class="alert alert-danger">author is required</div>
+                          
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">price</label>
+                            <input [(ngModel)]="livre.price" type="number" class="form-control" id="price" name="price"  required #price="ngModel" >
+                          </div>
+                          <div [hidden]="!price.pristine" class="alert alert-danger">price is required</div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">etapublishingDatet</label>
+                            <input [(ngModel)]="livre.etapublishingDatet" type="Date" class="form-control" id="etapublishingDatet" name="etapublishingDatet"  required #etapublishingDatet="ngModel" >
+                          </div>
+                          <div [hidden]="!etapublishingDatet.pristine" class="alert alert-danger">etapublishingDatet is required</div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">quantity</label>
+                            <input [(ngModel)]="livre.quantity" type="number" class="form-control" id="quantity" name="quantity"  required #quantity="ngModel" >
+                          </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Ajouter</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="card my-5">
+      <h2 align="center">Liste des livres</h2>
+        <div class="card-body">
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"><title></title></th>
+                <th scope="col"> price</th>
+                <th scope="col">id client</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let livre of livres">
+                <td>{{ livre.title }}</td>
+                <td>{{ livre.price }}</td>
+                <td>{{ livre.quantity }}</td>
+                <td> <button (click)="Supprimer(livre.title)" class="btn btn-danger">Supprimer</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>

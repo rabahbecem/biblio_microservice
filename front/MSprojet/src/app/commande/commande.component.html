@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>Ajouter une fichier</h2>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card">
+                  <form  (ngSubmit)="Ajouter(myForm)" #myForm="ngForm" >
+                      
+                       
+                      <div class="mb-3">
+                        <label for="exampleInputid1" class="form-label">id</label>
+                        <input [(ngModel)]="commande.id" type="string" class="form-control" id="id" name="id"  required #id="ngModel" >              
+                      </div>
+                      <div [hidden]="!id.pristine" class="alert alert-danger">id is required</div>
+                      <div class="mb-3">
+                        <label for="exampleInputDate_commande1" class="form-label">Date_commande</label>
+                        <input [(ngModel)]="commande.Date_commande" type="Date" class="form-control" id="Date_commande" name="Date_commande"  required #Date_commande="ngModel" >              
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputetat1" class="form-label">etat</label>
+                        <input [(ngModel)]="commande.etat" type="string" class="form-control" id="etat" name="etat"  required #etat="ngModel" >              
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputmontant1" class="form-label">montant</label>
+                        <input [(ngModel)]="commande.montant" type="number" class="form-control" id="montant" name="montant"  required #montant="ngModel" >              
+                      </div>
+                      <div class="mb-3">
+                        <label for="customerID" class="form-label"> Client : </label>
+                          <select [(ngModel)]="commande.id_client"  [ngModelOptions]="{standalone: true}" id="id_client" name="id_client"  required #id_client="ngModel">
+                              <option *ngFor="let client of clients" [ngValue]="client.id">
+                                  {{client.id}} {{client.name}}
+                              </option>
+                          </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="customerID" class="form-label"> Livre : </label>
+                          <select [(ngModel)]="ti"  [ngModelOptions]="{standalone: true}" id="Details" name="Details"  required #Details="ngModel">
+                              <option *ngFor="let livre of livres" [ngValue]="livre.title">
+                                  {{livre.title}} 
+                              </option>
+                          </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputmontant1" class="form-label">Quantite</label>
+                        <input [(ngModel)]="qe" type="number" class="form-control" id="qte" name="qte"  required #qte="ngModel" >              
+                      </div>
+                      <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Ajouter</button>
+                    </form>
+                    
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="card my-5">
+    <h2 align="center">Liste des fichiers</h2>
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Id commande</th>
+              <th scope="col">date</th>
+              <th scope="col">id</th>
+              <th scope="col">Customer ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let commande of commandes">
+              <td>{{ commande.id }}</td>
+              <td>{{ commande.Date_commande }}</td>
+              <td>{{ commande.id_client }}</td>
+              <td>{{ commande.Details.qte }}</td>
+              <td> <button (click)="Supprimer(commande.id)" class="btn btn-danger">Supprimer</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

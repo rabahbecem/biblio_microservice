@@ -1,0 +1,51 @@
+<div >
+<div class="container" >
+ 
+    <div class="row"  >
+      <h2 align="center">Ajouter un client</h2>
+        <div class="col-md-6">
+            <div class="card">
+                <form  (ngSubmit)="Ajouter(myForm)" #myForm="ngForm" >
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">id</label>
+                    <input [(ngModel)]="client.id" type="text" class="form-control" id="id" name="id"  required #id="ngModel" >
+                  </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">name</label>
+                        <input [(ngModel)]="client.name" type="text" class="form-control" id="name" name="name"  required #name="ngModel" >
+                      </div>
+                      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input [(ngModel)]="client.email" type="email" class="form-control" id="Email" name="email"  required #email="ngModel" >              
+                    </div>
+                    <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Ajouter</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="card my-5">
+  <h2 align="center">Liste des clients</h2>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients">
+            <td>{{ client.id }}</td>
+            <td>{{ client.name }}</td>
+            <td><a href="mailto:{{ client.email }}">{{ client.email }}</a></td>
+            <td> <button (click)="Supprimer(client.id)" class="btn btn-danger">Supprimer</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

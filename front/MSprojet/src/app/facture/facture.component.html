@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Ajouter une fichier</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form  (ngSubmit)="Ajouter(myForm)" #myForm="ngForm" >
+                    
+                     
+                    <div class="mb-3">
+                      <label for="exampleInputAmount1" class="form-label">Amount</label>
+                      <input [(ngModel)]="facture.amount" type="number" class="form-control" id="amount" name="amount"  required #amount="ngModel" >              
+                    </div>
+                    <div [hidden]="!amount.pristine" class="alert alert-danger">Amount is required</div>
+                    <div class="mb-3">
+                      <label for="customerID" class="form-label"> Client : </label>
+                        <select [(ngModel)]="facture.customerID"  [ngModelOptions]="{standalone: true}" id="customerID" name="customerID"  required #customerID="ngModel">
+                            <option *ngFor="let client of clients" [ngValue]="client.id">
+                                {{client.id}} {{client.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!myForm.form.valid">Ajouter</button>
+                  </form>
+                  
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card my-5">
+  <h2 align="center">Liste des fichiers</h2>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id facture</th>
+            <th scope="col">date</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Customer ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of Factures">
+            <td>{{ facture.id }}</td>
+            <td>{{ facture.date }}</td>
+            <td>{{ facture.amount }}</td>
+            <td>{{ facture.customerID }}</td>
+            <td> <button (click)="Supprimer(facture.id)" class="btn btn-danger">Supprimer</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
